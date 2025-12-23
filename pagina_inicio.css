@@ -38,37 +38,52 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(10, 10, 10, 0.98);
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: var(--transition);
-    border-bottom: 1px solid rgba(204, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(204, 0, 0, 0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .navbar.scrolled {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid rgba(204, 0, 0, 0.5);
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 0.8rem 20px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-}
-
-.logo-image {
-    height: 50px;
-    width: auto;
+    background: #0a0a0a;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(204, 0, 0, 0.2);
     transition: var(--transition);
 }
 
+.logo:hover {
+    background: #0a0a0a;
+    border-color: rgba(204, 0, 0, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(204, 0, 0, 0.3);
+}
+
+.logo-image {
+    height: 65px;
+    width: auto;
+    transition: var(--transition);
+    filter: drop-shadow(0 2px 8px rgba(204, 0, 0, 0.3));
+}
+
 .logo-image:hover {
-    transform: scale(1.05);
+    filter: drop-shadow(0 4px 12px rgba(204, 0, 0, 0.5));
 }
 
 .logo-barbell {
@@ -83,6 +98,20 @@ body {
     font-weight: 600;
     color: var(--light);
     letter-spacing: 3px;
+}
+
+/* Efecto de brillo para el logo */
+@keyframes logoGlow {
+    0%, 100% {
+        filter: drop-shadow(0 2px 8px rgba(204, 0, 0, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 2px 12px rgba(204, 0, 0, 0.6));
+    }
+}
+
+.navbar.scrolled .logo-image {
+    animation: logoGlow 3s ease-in-out infinite;
 }
 
 .nav-menu {
@@ -867,9 +896,17 @@ section {
     margin-top: 1rem;
 }
 
+.footer-brand .logo {
+    background: #1a1a1a;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(204, 0, 0, 0.2);
+    display: inline-flex;
+    margin-bottom: 1rem;
+}
+
 .footer-brand .logo-image {
-    height: 60px;
-    margin-bottom: 0.5rem;
+    height: 70px;
 }
 
 .footer-links h4,
@@ -946,6 +983,14 @@ section {
    RESPONSIVE
    ========================================== */
 @media (max-width: 768px) {
+    .logo-image {
+        height: 40px;
+    }
+
+    .footer-brand .logo-image {
+        height: 50px;
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
