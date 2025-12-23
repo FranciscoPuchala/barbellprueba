@@ -94,10 +94,18 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observar elementos para animación
-const fadeElements = document.querySelectorAll('.about-card, .class-card, .facility-item, .pricing-card, .welcome-content, .welcome-image, .contact-card');
+const fadeElements = document.querySelectorAll('.about-card, .class-card, .facility-item, .welcome-content, .welcome-image, .contact-card');
 fadeElements.forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
+});
+
+// Animación especial para las tarjetas de precios
+const pricingCards = document.querySelectorAll('.pricing-card');
+pricingCards.forEach((card, index) => {
+    card.classList.add('price-fade-in');
+    card.style.transitionDelay = `${index * 0.15}s`;
+    observer.observe(card);
 });
 
 // ==========================================
