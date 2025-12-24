@@ -80,13 +80,9 @@ window.addEventListener('scroll', () => {
 // ==========================================
 // ANIMACIÓN DE APARICIÓN AL SCROLL
 // ==========================================
-
-const isMobile = window.innerWidth <= 768;
-
-// Configuración diferente para móvil vs desktop
 const observerOptions = {
-    threshold: isMobile ? 0.05 : 0.1,
-    rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
