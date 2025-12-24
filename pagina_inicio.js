@@ -100,11 +100,12 @@ fadeElements.forEach(el => {
     observer.observe(el);
 });
 
-// Animación especial para las tarjetas de precios
+// Animación especial para las tarjetas de precios (MÁS LENTA)
 const pricingCards = document.querySelectorAll('.pricing-card');
 pricingCards.forEach((card, index) => {
     card.classList.add('price-fade-in');
-    card.style.transitionDelay = `${index * 0.15}s`;
+    // Cambio: delay aumentado de 0.15s a 0.4s entre cada tarjeta
+    card.style.transitionDelay = `${index * 0.4}s`;
     observer.observe(card);
 });
 
@@ -113,7 +114,7 @@ pricingCards.forEach((card, index) => {
 // ==========================================
 document.querySelectorAll('.about-card, .class-card, .pricing-card').forEach(card => {
     card.style.transformStyle = 'preserve-3d';
-    card.style.transition = 'transform 0.1s ease-out';
+    card.style.transition = 'transform 0.9s ease-out';
     
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
