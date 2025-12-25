@@ -93,12 +93,31 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observar elementos para animación
-const fadeElements = document.querySelectorAll('.about-card, .class-card, .facility-item, .welcome-content, .welcome-image, .contact-card');
-fadeElements.forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-});
+// Observar elementos para animación (EXCLUYENDO class-card en móvil)
+const isMobile = window.innerWidth <= 768;
+
+if (isMobile) {
+    // En móvil: NO animar las tarjetas de clases, animarlas inmediatamente
+    const classCards = document.querySelectorAll('.class-card');
+    classCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+    });
+    
+    // Animar solo otros elementos
+    const fadeElements = document.querySelectorAll('.about-card, .facility-item, .welcome-content, .welcome-image, .contact-card');
+    fadeElements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+} else {
+    // En escritorio: animar todo normalmente
+    const fadeElements = document.querySelectorAll('.about-card, .class-card, .facility-item, .welcome-content, .welcome-image, .contact-card');
+    fadeElements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+}
 
 // Animación especial para las tarjetas de precios (MÁS LENTA)
 const pricingCards = document.querySelectorAll('.pricing-card');
@@ -112,31 +131,34 @@ pricingCards.forEach((card, index) => {
 // ==========================================
 // EFECTO 3D EN TARJETAS (MEJORADO)
 // ==========================================
-document.querySelectorAll('.about-card, .class-card, .pricing-card').forEach(card => {
-    card.style.transformStyle = 'preserve-3d';
-    card.style.transition = 'transform 0.9s ease-out';
-    
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+// Solo aplicar en escritorio
+if (!isMobile) {
+    document.querySelectorAll('.about-card, .class-card, .pricing-card').forEach(card => {
+        card.style.transformStyle = 'preserve-3d';
+        card.style.transition = 'transform 0.9s ease-out';
         
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 30;
+            const rotateY = (centerX - x) / 30;
+            
+            requestAnimationFrame(() => {
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+        });
         
-        const rotateX = (y - centerY) / 30;
-        const rotateY = (centerX - x) / 30;
-        
-        requestAnimationFrame(() => {
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.3s ease';
+            card.style.transform = '';
         });
     });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transition = 'transform 0.3s ease';
-        card.style.transform = '';
-    });
-});
+}
 
 // ==========================================
 // DETECTAR DISPOSITIVO TÁCTIL
