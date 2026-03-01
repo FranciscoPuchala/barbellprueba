@@ -167,7 +167,7 @@ body {
 .hero {
     height: 100vh;
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.75), rgba(204, 0, 0, 0.4)),
-                url('./img/IMG-20250129-WA0004.jpg');
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -553,27 +553,26 @@ section {
 
 .class-image {
     height: 250px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(rgba(10,10,10,0.45), rgba(204,0,0,0.25)),
+                url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
     position: relative;
     overflow: hidden;
 }
 
-.class-image::before {
-    content: '🏋️';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.class-image-lifting {
+    background-image: linear-gradient(rgba(10,10,10,0.45), rgba(204,0,0,0.25)),
+                      url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
 }
 
-.class-image-lifting::before {
-    content: '🏅';
-}
-
-.class-image-strength::before {
-    content: '💪';
+.class-image-strength {
+    background-image: linear-gradient(rgba(10,10,10,0.45), rgba(204,0,0,0.25)),
+                      url('https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&q=80&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
 }
 
 .class-overlay {
